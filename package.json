@@ -1,0 +1,43 @@
+{
+  "name": "e-commerce-demo",
+  "version": "1.0.0",
+  "description": "E-commerce example with test automation",
+  "private": false,
+  "scripts": {
+    "install:all": "npm install && cd backend && npm install && cd ../frontend && npm install && cd ../api-test && npm install && cd ../frontend-test && npm install",
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "install:api-test": "cd api-test && npm install",
+    "install:frontend-test": "cd frontend-test && npm install",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:backend": "cd backend && npm run build",
+    "build:frontend": "cd frontend && npm run build",
+    "build": "npm run build:backend && npm run build:frontend",
+    "test:api": "cd api-test && npm test tests",
+    "test:e2e": "cd frontend-test && npx wdio",
+    "test": "npm run test:api && npm run test:e2e",
+    "clean": "rm -rf backend/node_modules backend/dist frontend/node_modules frontend/dist api-test/node_modules frontend-test/node_modules",
+    "clean:builds": "rm -rf backend/dist frontend/dist"
+  },
+  "workspaces": [
+    "backend",
+    "frontend",
+    "api-test",
+    "frontend-test"
+  ],
+  "keywords": [
+    "monorepo",
+    "e-commerce",
+    "testing",
+    "automation",
+    "karate",
+    "webdriverio"
+  ],
+  "author": "Ian Renauld",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

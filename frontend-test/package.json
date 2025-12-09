@@ -1,0 +1,19 @@
+{
+  "name": "front-end-tests",
+  "version": "0.1.0",
+  "description": "Front End test cases example using Webdriver.io framework for Highspring coding exercise",
+  "type": "module",
+  "author": "Ian Renauld",
+  "license": "ISC",
+  "dependencies": {
+    "@wdio/cli": "^8.46.0",
+    "@wdio/local-runner": "^8.46.0",
+    "@wdio/mocha-framework": "^8.46.0",
+    "@wdio/spec-reporter": "^8.43.0",
+    "axios": "^1.13.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-airbnb-base": "^15.0.0"
+  }
+}

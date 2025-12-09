@@ -1,0 +1,17 @@
+{
+  "extends": "airbnb-base",
+  "globals": {
+    "karate": true,
+    "Java":   true,
+    "java":   true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2022
+  },
+  "rules": {
+    "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
+    "key-spacing":                 ["error", { "align": "value" }],
+    "comma-dangle":                ["error", "never"],
+    "quotes":                      ["error", "double"]
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "browser": true,
+    "mocha": true
+  },
+  "globals": {
+    "browser": true,
+    "$": true,
+    "$$": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2024
+  },
+  "rules": {
+    "import/extensions": ["error", "always"],
+    "class-methods-use-this": "off",
+    "function-paren-newline": [
+      "error",
+      "never"
+    ],
+    "key-spacing": [
+      "error",
+      {
+        "align": "value"
+      }
+    ],
+    "lines-between-class-members": [
+      "error",
+      "always",
+      {
+        "exceptAfterSingleLine": true
+      }
+    ],
+    "func-names": [
+      "error",
+      "never"
+    ],
+    "newline-per-chained-call": "off",
+    "no-multi-spaces": [
+      "error",
+      {
+        "exceptions": {
+          "FunctionExpression": true
+        }
+      }
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "object-curly-newline": [
+      "error",
+      {
+        "ObjectExpression": {
+          "minProperties": 7,
+          "multiline": true,
+          "consistent": true
+        },
+        "ObjectPattern": {
+          "minProperties": 7,
+          "multiline": true,
+          "consistent": true
+        },
+        "ImportDeclaration": {
+          "minProperties": 7,
+          "multiline": true,
+          "consistent": true
+        },
+        "ExportDeclaration": {
+          "minProperties": 7,
+          "multiline": true,
+          "consistent": true
+        }
+      }
+    ],
+    "line-comment-position": [
+      "error",
+      {
+        "position": "above"
+      }
+    ]
+  }
+}

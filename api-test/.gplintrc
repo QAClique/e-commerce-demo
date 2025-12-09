@@ -1,0 +1,76 @@
+{
+  "allowed-tags": [
+    "error",
+    {
+      "tags": [
+        "@ignore",
+        "@negative",
+        "@positive"
+      ]
+    }
+  ],
+  "allow-all-caps": "off",
+  "allow-all-lowercase": "off",
+  "indentation": [
+    "error",
+    {
+      "Feature": 0,
+      "Background": 0,
+      "Scenario": 0,
+      "Step": 2,
+      "Examples": 0,
+      "example": 2,
+      "given": 2,
+      "when": 2,
+      "then": 2,
+      "and": 2,
+      "feature tag": 0,
+      "scenario tag": 0,
+      "examples tag": 0,
+      "type": "space"
+    }
+  ],
+  "keywords-in-logical-order": "off",
+  "max-scenarios-per-file": "off",
+  "max-tags-lines": [
+    "error",
+    {
+      "feature": 1,
+      "scenario": 1,
+      "example": 1
+    }
+  ],
+  "name-length": [
+    "error",
+    {
+      "Feature": 100,
+      "Scenario": 100,
+      "Step": 100
+    }
+  ],
+  "new-line-at-eof": ["error", "yes"],
+  "no-background-only-scenario": "error",
+  "no-dupe-feature-names": "error",
+  "no-dupe-scenario-names": "error",
+  "no-duplicate-tags": "error",
+  "no-empty-background": "error",
+  "no-empty-file": "error",
+  "no-examples-in-scenarios": "error",
+  "no-files-without-scenarios": "error",
+  "no-homogenous-tags": "error",
+  "no-multiple-empty-lines": "error",
+  "no-partially-commented-tag-lines": "error",
+  "no-restricted-patterns": "off",
+  "no-restricted-tags": "off",
+  "no-superfluous-tags": "error",
+  "no-trailing-spaces": "error",
+  "no-unnamed-features": "error",
+  "no-unnamed-scenarios": "error",
+  "no-unused-variables": "off",
+  "one-space-between-tags": "error",
+  "required-tags": "off",
+  "related-tags": "off",
+  "scenario-size": "off",
+  "table-align": ["error", { "steps": true, "examples": true }],
+  "use-and": "error"
+}
