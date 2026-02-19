@@ -1,12 +1,19 @@
 import { Product } from './types';
 import { v4 as uuidv4 } from 'uuid';
 
-// Initial seed products
+export const escapeSvgText = (text: string): string =>
+  text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+
 // Helper function to generate simple product image
 const generateProductImage = (text: string, bgColor: string = '#4A90E2'): string => {
+  const safeText = escapeSvgText(text);
   const svg = `<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
     <rect width="300" height="300" fill="${bgColor}"/>
-    <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle" dominant-baseline="middle">${text}</text>
+    <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle" dominant-baseline="middle">${safeText}</text>
   </svg>`;
   return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 };

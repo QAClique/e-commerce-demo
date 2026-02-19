@@ -10,12 +10,6 @@ export const api = {
     return response.json();
   },
 
-  async getProduct(id: string): Promise<Product> {
-    const response = await fetch(`${API_BASE_URL}/products/${id}`);
-    if (!response.ok) throw new Error('Failed to fetch product');
-    return response.json();
-  },
-
   // Cart
   async createCart(): Promise<Cart> {
     const response = await fetch(`${API_BASE_URL}/cart`, {
@@ -82,12 +76,6 @@ export const api = {
       const error = await response.json();
       throw new Error(error.errors ? error.errors.join(', ') : 'Failed to process checkout');
     }
-    return response.json();
-  },
-
-  async getOrder(orderId: string): Promise<Order> {
-    const response = await fetch(`${API_BASE_URL}/orders/${orderId}`);
-    if (!response.ok) throw new Error('Failed to fetch order');
     return response.json();
   },
 };

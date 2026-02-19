@@ -32,10 +32,21 @@ export interface CheckoutDetails {
   cardCvv: string;
 }
 
+export interface SafeCheckoutDetails {
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  city: string;
+  zipCode: string;
+  country: string;
+  maskedCardNumber: string;
+}
+
 export interface Order {
   id: string;
   cartId: string;
-  checkoutDetails: CheckoutDetails;
+  checkoutDetails: SafeCheckoutDetails;
   totalAmount: number;
   createdAt: string;
 }

@@ -1,9 +1,12 @@
-import { Cart, CartItem } from './types';
+import { Cart, Product } from './types';
 import { v4 as uuidv4 } from 'uuid';
 import { productService } from './productService';
 
 // In-memory storage for carts
 const carts = new Map<string, Cart>();
+
+const exceedsStock = (product: Product, requestedTotal: number): boolean =>
+  requestedTotal > product.stock;
 
 export const cartService = {
   createCart(): Cart {
@@ -31,14 +34,12 @@ export const cartService = {
     const existingItem = cart.items.find(item => item.productId === productId);
 
     if (existingItem) {
-      // Check stock availability
-      if (existingItem.quantity + quantity > product.stock) {
+      if (exceedsStock(product, existingItem.quantity + quantity)) {
         return null;
       }
       existingItem.quantity += quantity;
     } else {
-      // Check stock availability
-      if (quantity > product.stock) {
+      if (exceedsStock(product, quantity)) {
         return null;
       }
       cart.items.push({ productId, quantity });
@@ -63,12 +64,12 @@ export const cartService = {
       return this.removeItemFromCart(cartId, productId);
     }
 
-    const item = cart.items.find(item => item.productId === productId);
+    const item = cart.items.find(i => i.productId === productId);
     if (!item) return null;
 
     // Verify stock availability
     const product = productService.getProductById(productId);
-    if (!product || quantity > product.stock) {
+    if (!product || exceedsStock(product, quantity)) {
       return null;
     }
 

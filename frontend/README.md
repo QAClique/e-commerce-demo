@@ -14,7 +14,7 @@ npm install
 npm run dev
 ```
 
-The application will start on http://localhost:3000
+The application will start on <http://localhost:3000>
 
 ## Build
 
