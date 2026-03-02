@@ -1,4 +1,4 @@
-import { CheckoutDetails, Order } from './types';
+import { CheckoutDetails, Order, SafeCheckoutDetails } from './types';
 import { v4 as uuidv4 } from 'uuid';
 import { cartService } from './cartService';
 
@@ -74,11 +74,23 @@ export const checkoutService = {
       return { success: false, errors: ['Cart is empty'] };
     }
 
+    // Strip sensitive card data — store only masked card number, drop CVV
+    const safeDetails: SafeCheckoutDetails = {
+      firstName: checkoutDetails.firstName,
+      lastName: checkoutDetails.lastName,
+      email: checkoutDetails.email,
+      address: checkoutDetails.address,
+      city: checkoutDetails.city,
+      zipCode: checkoutDetails.zipCode,
+      country: checkoutDetails.country,
+      maskedCardNumber: `**** **** **** ${checkoutDetails.cardNumber.replace(/\s/g, '').slice(-4)}`,
+    };
+
     // Create order
     const order: Order = {
       id: uuidv4(),
       cartId,
-      checkoutDetails,
+      checkoutDetails: safeDetails,
       totalAmount: cartWithProducts.total,
       createdAt: new Date()
     };

@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
-import { productService } from './productService';
+import { Product } from './types';
+import { productService, escapeSvgText } from './productService';
 import { cartService } from './cartService';
 import { checkoutService } from './checkoutService';
 
@@ -8,8 +9,14 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors({ origin: process.env.CORS_ORIGIN || 'http://localhost:3000' }));
+app.use(express.json({ limit: '10kb' }));
+
+const isValidPrice = (value: unknown): value is number =>
+  typeof value === 'number' && value >= 0;
+
+const isValidStock = (value: unknown): value is number =>
+  typeof value === 'number' && value >= 0;
 
 // Products endpoints
 app.get('/api/products', (req: Request, res: Response) => {
@@ -34,18 +41,19 @@ app.post('/api/products', (req: Request, res: Response) => {
   if (!description || typeof description !== 'string') {
     return res.status(400).json({ error: 'Product description is required' });
   }
-  if (typeof price !== 'number' || price < 0) {
+  if (!isValidPrice(price)) {
     return res.status(400).json({ error: 'Valid price is required' });
   }
-  if (typeof stock !== 'number' || stock < 0) {
+  if (!isValidStock(stock)) {
     return res.status(400).json({ error: 'Valid stock quantity is required' });
   }
 
   // Generate inline SVG image if no imageUrl provided
   const defaultImage = imageUrl || (() => {
+    const safeName = escapeSvgText(name.trim());
     const svg = `<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
       <rect width="300" height="300" fill="#95A5A6"/>
-      <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle" dominant-baseline="middle">${name.trim()}</text>
+      <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="20" fill="white" text-anchor="middle" dominant-baseline="middle">${safeName}</text>
     </svg>`;
     return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
   })();
@@ -64,7 +72,7 @@ app.post('/api/products', (req: Request, res: Response) => {
 
 app.put('/api/products/:id', (req: Request, res: Response) => {
   const { name, description, price, imageUrl, stock } = req.body;
-  const updates: any = {};
+  const updates: Partial<Omit<Product, 'id'>> = {};
 
   // Only update provided fields
   if (name !== undefined) {
@@ -80,7 +88,7 @@ app.put('/api/products/:id', (req: Request, res: Response) => {
     updates.description = description.trim();
   }
   if (price !== undefined) {
-    if (typeof price !== 'number' || price < 0) {
+    if (!isValidPrice(price)) {
       return res.status(400).json({ error: 'Invalid price' });
     }
     updates.price = price;
@@ -89,7 +97,7 @@ app.put('/api/products/:id', (req: Request, res: Response) => {
     updates.imageUrl = imageUrl;
   }
   if (stock !== undefined) {
-    if (typeof stock !== 'number' || stock < 0) {
+    if (!isValidStock(stock)) {
       return res.status(400).json({ error: 'Invalid stock quantity' });
     }
     updates.stock = stock;
@@ -111,7 +119,7 @@ app.delete('/api/products/:id', (req: Request, res: Response) => {
   res.status(204).send();
 });
 
-// Test utility endpoints (useful for automated testing)
+// Test utility endpoints
 app.post('/api/products/reset', (req: Request, res: Response) => {
   productService.resetProducts();
   res.json({ message: 'Products reset to initial state' });

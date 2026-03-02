@@ -2,7 +2,7 @@
 import karate from "@karatelabs/karate";
 import fs from "node:fs";
 
-karate.version = "1.5.1";
+karate.version = "1.5.2";
 
 // Create the target directory if it doesn't exist
 const targetDir = "./target";

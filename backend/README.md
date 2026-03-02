@@ -14,7 +14,7 @@ npm install
 npm run dev
 ```
 
-The server will start on http://localhost:3001
+The server will start on <http://localhost:3001>
 
 ## Build
 
@@ -26,6 +26,7 @@ npm start
 ## API Endpoints
 
 ### Products
+
 - `GET /api/products` - Get all products
 - `GET /api/products/:id` - Get a specific product
 - `POST /api/products` - Create a new product
@@ -35,10 +36,12 @@ npm start
 - `DELETE /api/products/:id` - Delete a product
 
 ### Test Utilities
+
 - `POST /api/products/reset` - Reset products to initial seed data
 - `DELETE /api/products` - Clear all products
 
 ### Cart
+
 - `POST /api/cart` - Create a new cart
 - `GET /api/cart/:cartId` - Get cart details
 - `POST /api/cart/:cartId/items` - Add item to cart
@@ -48,9 +51,11 @@ npm start
   - Body: `{ "quantity": number }`
 
 ### Checkout
+
 - `POST /api/checkout` - Process checkout
   - Body: `{ "cartId": "string", "checkoutDetails": {...} }`
 - `GET /api/orders/:orderId` - Get order details
 
 ### Health
+
 - `GET /health` - Health check endpoint
