@@ -1,13 +1,11 @@
 import axios from 'axios';
 import Utils from '../utils/utils.js';
 
-
 export default class Page {
-  baseUrl = "http://localhost:3000";
+  baseUrl = 'http://localhost:3000';
 
   get cartButton()        { return $('[data-testid="cart-button"]'); }
   get cartIconItemCount() { return $('span.cart-count'); }
-
 
   /**
    * Opens the specified page
@@ -31,10 +29,10 @@ export default class Page {
     const productStock = Utils.getRandomNumber(100, 1);
 
     const response = await axios.post(`${this.baseUrl}/api/products`, {
-      name: productName,
+      name:        productName,
       description: productDescription,
-      price: productPrice,
-      stock: productStock
+      price:       productPrice,
+      stock:       productStock
     });
 
     return response.data.id;
@@ -47,11 +45,11 @@ export default class Page {
    */
   async addProductToCart(productId) {
     const cartId = await this.getCartId();
-    const response = await axios.post(`${this.baseUrl}/api/cart/${cartId}/items`, {
-      productId: productId,
+    await axios.post(`${this.baseUrl}/api/cart/${cartId}/items`, {
+      productId,
       quantity: 1
     });
-   }
+  }
 
   /**
    * Gets the cart Id from the cart button attribute to use with API calls
