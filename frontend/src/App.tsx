@@ -125,9 +125,10 @@ function App() {
           <div
             className="cart-icon"
             onClick={() => setView('cart')}
+            data-cart-id={cart?.id}
             data-testid="cart-button"
           >
-            🛒
+            <span className="cart-emoji">🛒</span>
             {cartItemCount > 0 && (
               <span className="cart-count">{cartItemCount}</span>
             )}
