@@ -1,0 +1,22 @@
+{
+  "extends": [
+    "airbnb-base",
+    "airbnb-typescript/base"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": true
+  },
+  "rules": {
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": true
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "no-restricted-syntax": "off",
+    "no-await-in-loop": "off",
+    "key-spacing": ["error", { "align": "value" }]
+  }
+}

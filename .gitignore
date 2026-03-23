@@ -37,3 +37,6 @@ coverage/
 
 # OS files
 Thumbs.db
+
+playwright-api-test/playwright-report
+playwright-api-test/test-results

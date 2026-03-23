@@ -8,6 +8,7 @@ Scenario: Add Product Utility
 #---------------------------------------------------------------------------------------------------
 
   * def utils = call read(`file:${root}/utils/utils.js`)
+  * def addProductSchema = read(`file:${root}/schemas/addProduct.json`)
   * def productName = utils.getRndAlphaString()
   * def description = utils.getRndAlphaString()
   * def price = utils.getRandomNumber(10000, 1) / 100
@@ -26,4 +27,5 @@ Scenario: Add Product Utility
   When method POST
   Then status 201
   And match header Content-Type == "application/json; charset=utf-8"
+  And match response == addProductSchema
   And def productId = response.id
